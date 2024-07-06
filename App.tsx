@@ -1,37 +1,72 @@
-import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Sidebar from './components/Sidebar'; // Import your Sidebar component
-import Animatedintro from './components/Animatedintro'; // Adjust the path to your Animatedintro component
-import Baramati from './components/baramati'; // Adjust the path to your Baramati component
-import Bhormap from './components/Bhormap'; // Adjust the path to your Bhormap component
-import DaundMap from './components/DaundMap'; // Adjust the path to your DaundMap component
-import IndapurMap from './components/IndapurMap'; // Adjust the path to your IndapurMap component
-import Khadakwasla from './components/Khadakwasla'; // Adjust the path to your Khadakwasla component
-import Purandarmap from './components/Purandarmap'; // Adjust the path to your Purandarmap component
-import KaryakartaForm from './components/KaryakartaForm'; // Adjust the path to your KaryakartaForm component
-import SurveyForm from './components/SurveyForm'; // Adjust the path to your SurveyForm component
-import Login from './components/Login'; // Adjust the path to your SurveyForm component
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import PublicSidebar from './components/PublicSidebar';
+import AdminSidebar from './AdminPanel/Components/AdminSidebar';
+import { AuthProvider, AuthContext } from './AdminPanel/Components/AuthContext';
 
+// Import screens
+import Animatedintro from './components/Animatedintro';
+import Baramati from './components/baramati';
+import Bhormap from './components/Bhormap';
+import DaundMap from './components/DaundMap';
+import IndapurMap from './components/IndapurMap';
+import Khadakwasla from './components/Khadakwasla';
+import Purandarmap from './components/Purandarmap';
+import KaryakartaForm from './components/KaryakartaForm';
+import SurveyForm from './components/SurveyForm';
+import Login from './components/Login';
+import Home from './AdminPanel/Components/Home';
+import Baramatidetails from './AdminPanel/Components/Baramatidetails';
+import Khadakwasladetails from './AdminPanel/Components/Khadakwasladetails';
+import Daunddetails from './AdminPanel/Components/Daunddetails';
+import Indapurdetails from './AdminPanel/Components/Indapurdetails';
+import Purandardetails from './AdminPanel/Components/Purandardetails';
+import Bhordetails from './AdminPanel/Components/Bhordetails';
+import Surveyformdetails from './AdminPanel/Components/Surveyformdetails';
+import Karyakartadetails from './AdminPanel/Components/Karyakartadetails';
 
-const Drawer = createDrawerNavigator();
+const PublicDrawer = createDrawerNavigator();
+const AdminDrawer = createDrawerNavigator();
 
-const App = () => {
+const PublicDrawerNavigator: React.FC = () => (
+  <PublicDrawer.Navigator drawerContent={props => <PublicSidebar {...props} />}>
+    <PublicDrawer.Screen name="Animatedintro" component={Animatedintro} />
+    <PublicDrawer.Screen name="Baramati" component={Baramati} />
+    <PublicDrawer.Screen name="Bhormap" component={Bhormap} />
+    <PublicDrawer.Screen name="DaundMap" component={DaundMap} />
+    <PublicDrawer.Screen name="IndapurMap" component={IndapurMap} />
+    <PublicDrawer.Screen name="Khadakwasla" component={Khadakwasla} />
+    <PublicDrawer.Screen name="Purandarmap" component={Purandarmap} />
+    <PublicDrawer.Screen name="KaryakartaForm" component={KaryakartaForm} />
+    <PublicDrawer.Screen name="SurveyForm" component={SurveyForm} />
+    <PublicDrawer.Screen name="Login" component={Login} />
+  </PublicDrawer.Navigator>
+);
+
+const AdminDrawerNavigator: React.FC = () => (
+  <AdminDrawer.Navigator drawerContent={props => <AdminSidebar {...props} />}>
+    <AdminDrawer.Screen name="Home" component={Home} />
+    <AdminDrawer.Screen name="Baramatidetails" component={Baramatidetails} />
+    <AdminDrawer.Screen name="Khadakwasladetails" component={Khadakwasladetails} />
+    <AdminDrawer.Screen name="Daunddetails" component={Daunddetails} />
+    <AdminDrawer.Screen name="Indapurdetails" component={Indapurdetails} />
+    <AdminDrawer.Screen name="Purandardetails" component={Purandardetails} />
+    <AdminDrawer.Screen name="Bhordetails" component={Bhordetails} />
+    <AdminDrawer.Screen name="Surveyformdetails" component={Surveyformdetails} />
+    <AdminDrawer.Screen name="Karyakartadetails" component={Karyakartadetails} />
+  </AdminDrawer.Navigator>
+);
+
+const App: React.FC = () => {
+  const { loggedIn } = useContext(AuthContext);
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <Sidebar {...props} />}>
-        <Drawer.Screen name="Animatedintro" component={Animatedintro} />
-        <Drawer.Screen name="Baramati" component={Baramati} />
-        <Drawer.Screen name="Bhormap" component={Bhormap} />
-        <Drawer.Screen name="DaundMap" component={DaundMap} />
-        <Drawer.Screen name="IndapurMap" component={IndapurMap} />
-        <Drawer.Screen name="Khadakwasla" component={Khadakwasla} />
-        <Drawer.Screen name="Purandarmap" component={Purandarmap} />
-        <Drawer.Screen name="KaryakartaForm" component={KaryakartaForm} />
-        <Drawer.Screen name="SurveyForm" component={SurveyForm} />
-        <Drawer.Screen name="Login" component={Login} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        {loggedIn ? <AdminDrawerNavigator /> : <PublicDrawerNavigator />}
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 

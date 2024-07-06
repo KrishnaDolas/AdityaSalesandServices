@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from '@react-navigation/drawer';
 
-const Sidebar: React.FC<DrawerContentComponentProps> = (props) => {
+const PublicSidebar: React.FC<DrawerContentComponentProps> = (props) => {
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.logoContainer}>
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Sidebar;
+export default PublicSidebar;

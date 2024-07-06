@@ -1,0 +1,59 @@
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Sidebar from './components/Sidebar';
+import Animatedintro from './components/Animatedintro';
+import Baramati from './components/baramati';
+import Bhormap from './components/Bhormap';
+import DaundMap from './components/DaundMap';
+import IndapurMap from './components/IndapurMap';
+import Khadakwasla from './components/Khadakwasla';
+import Purandarmap from './components/Purandarmap';
+import KaryakartaForm from './components/KaryakartaForm';
+import SurveyForm from './components/SurveyForm';
+import Login from './components/Login';
+import Home from './AdminPanel/Components/Home';
+import Baramatidetails from './AdminPanel/Components/Baramatidetails';
+import Khadakwasladetails from './AdminPanel/Components/Khadakwasladetails';
+import Daunddetails from './AdminPanel/Components/Daunddetails';
+import Indapurdetails from './AdminPanel/Components/Indapurdetails';
+import Purandardetails from './AdminPanel/Components/Purandardetails';
+import Bhordetails from './AdminPanel/Components/Bhordetails';
+import Surveyformdetails from './AdminPanel/Components/Surveyformdetails';
+import Karyakartadetails from './AdminPanel/Components/Karyakartadetails';
+import { AuthProvider } from './AdminPanel/Components/AuthContext';
+import { RootStackParamList } from './components/types';
+
+const Drawer = createDrawerNavigator();
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <NavigationContainer>
+        <Drawer.Navigator drawerContent={(props) => <Sidebar {...props} />}>
+          <Drawer.Screen name="Animatedintro" component={Animatedintro} />
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="Baramati" component={Baramati} />
+          <Drawer.Screen name="Bhormap" component={Bhormap} />
+          <Drawer.Screen name="DaundMap" component={DaundMap} />
+          <Drawer.Screen name="IndapurMap" component={IndapurMap} />
+          <Drawer.Screen name="Khadakwasla" component={Khadakwasla} />
+          <Drawer.Screen name="Purandarmap" component={Purandarmap} />
+          <Drawer.Screen name="KaryakartaForm" component={KaryakartaForm} />
+          <Drawer.Screen name="SurveyForm" component={SurveyForm} />
+          <Drawer.Screen name="BaramatiMap" component={Baramatidetails} />
+          <Drawer.Screen name="KhadakwaslaMap" component={Khadakwasladetails} />
+          <Drawer.Screen name="DaundMapdetails" component={Daunddetails} />
+          <Drawer.Screen name="IndapurMapdetails" component={Indapurdetails} />
+          <Drawer.Screen name="Purandarmapdetails" component={Purandardetails} />
+          <Drawer.Screen name="BhorMapdetails" component={Bhordetails} />
+          <Drawer.Screen name="SurveyDetails" component={Surveyformdetails} />
+          <Drawer.Screen name="KaryakartaDetails" component={Karyakartadetails} />
+          <Drawer.Screen name="Login" component={Login} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
+  );
+};
+
+export default App;

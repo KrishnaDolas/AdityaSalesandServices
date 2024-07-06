@@ -1,16 +1,14 @@
-// components/Login.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
-import RadioButtonGroup, { RadioButton } from 'react-native-radio-buttons-group';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { login } from './authService'; // Adjust the path to your authService
-import { RootStackParamList } from './types'; // Adjust the path to your App file
+import { login, LoginResponse } from './authService'; // Adjust the path to your authService
+import { RootStackParamList } from './types'; // Adjust the path to your types file
 
 const Login: React.FC = () => {
-  const [adminName, setAdminName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [profile, setProfile] = useState('Admin');
+  const [profile, setProfile] = useState('Admin'); // Default profile selection
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const profileOptions = [
@@ -24,14 +22,38 @@ const Login: React.FC = () => {
 
   const handleSignIn = async () => {
     try {
-      const isAuthenticated = await login(adminName, password);
-      if (isAuthenticated) {
-        navigation.navigate('Home2');
+      const type_admin = profile === 'Admin' ? 1 : 0;
+      const type_superadmin = profile === 'Super Admin' ? 1 : 0;
+  
+      const payload = {
+        username,
+        password,
+        type_admin,
+        type_superadmin,
+      };
+  
+      console.log('Login payload:', payload);
+  
+      const response: LoginResponse = await login(username, password, type_admin, type_superadmin);
+      console.log('Login response:', response);
+  
+      if (response.success) {
+        if (profile === 'Admin') {
+          navigation.navigate('Home');
+        } else {
+          navigation.navigate('Animatedintro');
+        }
       } else {
-        Alert.alert('Login Failed', 'Invalid admin name or password');
+        Alert.alert('Login Failed', response.message || 'Invalid username or password');
       }
-    } catch (error) {
-      Alert.alert('Login Error', 'An error occurred during login. Please try again.');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Login error:', error);
+        Alert.alert('Login Error', error.message || 'An error occurred during login. Please try again.');
+      } else {
+        console.error('An unknown error occurred:', error);
+        Alert.alert('Login Error', 'An unknown error occurred. Please try again.');
+      }
     }
   };
 
@@ -45,12 +67,12 @@ const Login: React.FC = () => {
         <Text style={[styles.title, styles.bold, styles.black]}> CSM</Text>
       </View>
       <Text style={styles.signInText}>Sign In</Text>
-      <Text style={styles.label}>Admin Name</Text>
+      <Text style={styles.label}>Username</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter your admin name"
-        value={adminName}
-        onChangeText={setAdminName}
+        placeholder="Enter your username"
+        value={username}
+        onChangeText={setUsername}
       />
       <Text style={styles.label}>Password</Text>
       <View style={styles.passwordContainer}>
@@ -69,17 +91,20 @@ const Login: React.FC = () => {
         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
       </TouchableOpacity>
       <Text style={styles.label}>Select Profile :</Text>
-      <RadioButtonGroup
-        containerStyle={styles.radioGroup}
-        radioButtons={profileOptions}
-        onPress={(radioButtonsArray: any) => {
-          const selectedButton = radioButtonsArray.find((button: any) => button.selected);
-          if (selectedButton) {
-            handleProfileChange(selectedButton.value);
-          }
-        }}
-        selectedId={profile}
-      />
+      <View style={styles.radioGroup}>
+        {profileOptions.map(option => (
+          <TouchableOpacity
+            key={option.id}
+            style={[
+              styles.radioButton,
+              profile === option.value && styles.radioButtonSelected,
+            ]}
+            onPress={() => handleProfileChange(option.value)}
+          >
+            <Text style={styles.radioButtonText}>{option.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
       <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
@@ -162,17 +187,34 @@ const styles = StyleSheet.create({
   },
   radioGroup: {
     flexDirection: 'row',
+    justifyContent: 'center',
     marginVertical: 20,
   },
-  button: {
-    backgroundColor: '#ff8c00',
-    padding: 15,
+  radioButton: {
+    borderWidth: 1,
+    borderColor: '#ccc',
     borderRadius: 5,
-    alignItems: 'center',
+    padding: 10,
+    marginHorizontal: 5,
+  },
+  radioButtonText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  radioButtonSelected: {
+    backgroundColor: '#ccc',
+  },
+  button: {
+    backgroundColor: '#00f',
+    padding: 15,
+    borderRadius: 25,
+    marginTop: 20,
   },
   buttonText: {
     color: '#fff',
+    textAlign: 'center',
     fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
