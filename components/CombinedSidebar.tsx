@@ -40,12 +40,12 @@ const CombinedSidebar: React.FC<Props> = (props) => {
       ) : (
         <>
           <DrawerItem label="Home" onPress={() => props.navigation.navigate('Home')} />
-          <DrawerItem label="Baramatidetails" onPress={() => props.navigation.navigate('Baramatidetails')} />
-          <DrawerItem label="Khadakwasladetails" onPress={() => props.navigation.navigate('Khadakwasladetails')} />
-          <DrawerItem label="Daunddetails" onPress={() => props.navigation.navigate('Daunddetails')} />
-          <DrawerItem label="Indapurdetails" onPress={() => props.navigation.navigate('Indapurdetails')} />
-          <DrawerItem label="Purandardetails" onPress={() => props.navigation.navigate('Purandardetails')} />
-          <DrawerItem label="Bhordetails" onPress={() => props.navigation.navigate('Bhordetails')} />
+          <DrawerItem label="Baramati Map" onPress={() => props.navigation.navigate('Baramatidetails')} />
+          <DrawerItem label="Khadakwasla Map" onPress={() => props.navigation.navigate('Khadakwasladetails')} />
+          <DrawerItem label="Daund Map" onPress={() => props.navigation.navigate('Daunddetails')} />
+          <DrawerItem label="Indapur Map" onPress={() => props.navigation.navigate('Indapurdetails')} />
+          <DrawerItem label="Purandar Map" onPress={() => props.navigation.navigate('Purandardetails')} />
+          <DrawerItem label="Bhor Map" onPress={() => props.navigation.navigate('Bhordetails')} />
           <DrawerItem label="Surveyformdetails" onPress={() => props.navigation.navigate('Surveyformdetails')} />
           <DrawerItem label="Karyakartadetails" onPress={() => props.navigation.navigate('Karyakartadetails')} />
           <DrawerItem
