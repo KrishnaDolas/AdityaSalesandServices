@@ -68,11 +68,6 @@ const styles = StyleSheet.create({
   black: {
     color: 'black',
   },
-  separator: {
-    marginVertical: 10,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-  },
 });
 
 export default AdminSidebar;

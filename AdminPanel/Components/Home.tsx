@@ -1,10 +1,8 @@
-// screens/Home.tsx
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ScreenProps } from '../../components/types'; // Adjust path as per your structure
+import { HomeScreenProps } from '../../components/types'; // Adjust path as necessary
 
-const Home: React.FC<ScreenProps<'Home'>> = ({ navigation, route }) => {
+const Home: React.FC<HomeScreenProps> = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Text>Welcome to the Home Screen!</Text>

@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { login, LoginResponse } from './authService'; // Adjust the path to your authService
+import { useAuth } from '../AdminPanel/Components/AuthContext'; // Adjust the path to your AuthContext
 import { RootStackParamList } from './types'; // Adjust the path to your types file
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [profile, setProfile] = useState('Admin'); // Default profile selection
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { login } = useAuth();
 
   const profileOptions = [
     { id: '1', label: 'Admin', value: 'Admin' },
@@ -20,41 +22,10 @@ const Login: React.FC = () => {
     setProfile(value);
   };
 
-  const handleSignIn = async () => {
-    try {
-      const type_admin = profile === 'Admin' ? 1 : 0;
-      const type_superadmin = profile === 'Super Admin' ? 1 : 0;
-  
-      const payload = {
-        username,
-        password,
-        type_admin,
-        type_superadmin,
-      };
-  
-      console.log('Login payload:', payload);
-  
-      const response: LoginResponse = await login(username, password, type_admin, type_superadmin);
-      console.log('Login response:', response);
-  
-      if (response.success) {
-        if (profile === 'Admin') {
-          navigation.navigate('Home');
-        } else {
-          navigation.navigate('Animatedintro');
-        }
-      } else {
-        Alert.alert('Login Failed', response.message || 'Invalid username or password');
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Login error:', error);
-        Alert.alert('Login Error', error.message || 'An error occurred during login. Please try again.');
-      } else {
-        console.error('An unknown error occurred:', error);
-        Alert.alert('Login Error', 'An unknown error occurred. Please try again.');
-      }
-    }
+  const handleSignIn = () => {
+    const type_admin = profile === 'Admin' ? 1 : 0;
+    const type_superadmin = profile === 'Super Admin' ? 1 : 0;
+    login(username, password, type_admin, type_superadmin, navigation);
   };
 
   return (
@@ -81,10 +52,10 @@ const Login: React.FC = () => {
           placeholder="********"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          secureTextEntry={!showPassword}
         />
-        <TouchableOpacity style={styles.eyeIcon}>
-          <AntDesign name="eyeo" size={25} color="black" />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+          <AntDesign name={showPassword ? "eye" : "eyeo"} size={25} color="black" />
         </TouchableOpacity>
       </View>
       <TouchableOpacity>
@@ -92,7 +63,7 @@ const Login: React.FC = () => {
       </TouchableOpacity>
       <Text style={styles.label}>Select Profile :</Text>
       <View style={styles.radioGroup}>
-        {profileOptions.map(option => (
+        {profileOptions.map((option) => (
           <TouchableOpacity
             key={option.id}
             style={[
@@ -183,36 +154,36 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: '#00f',
     textAlign: 'right',
-    marginBottom: 20,
+    marginVertical: 10,
   },
   radioGroup: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 20,
+    marginBottom: 20,
   },
   radioButton: {
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginHorizontal: 5,
-  },
-  radioButtonText: {
-    fontSize: 16,
-    color: '#333',
+    borderRadius: 25,
+    backgroundColor: '#fff',
   },
   radioButtonSelected: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#00f',
+  },
+  radioButtonText: {
+    color: '#333',
   },
   button: {
-    backgroundColor: '#00f',
+    backgroundColor: '#ff8c00',
     padding: 15,
     borderRadius: 25,
-    marginTop: 20,
+    alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
-    textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
   },

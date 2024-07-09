@@ -23,8 +23,14 @@ export type RootStackParamList = {
   Karyakartadetails: undefined;
 };
 
-// Define and export HomeScreenProps
+type ParamListBase = RootStackParamList;
+
 export type HomeScreenProps = {
   navigation: DrawerNavigationProp<RootStackParamList, 'Home'>;
   route: RouteProp<RootStackParamList, 'Home'>;
 };
+
+export type ScreenComponentType<ParamList extends ParamListBase, RouteName extends keyof ParamList> = React.ComponentType<{
+  navigation: DrawerNavigationProp<ParamList, RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+}>;
