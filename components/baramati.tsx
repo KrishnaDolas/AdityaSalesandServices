@@ -135,6 +135,7 @@ const Baramati = () => {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Svg
         width={Dimensions.get("window").width}
@@ -2483,8 +2484,10 @@ const Baramati = () => {
           />
         </TouchableWithoutFeedback>
       </Svg>
+      
 
       <Modal isVisible={isModalVisible}>
+      
         <View style={styles.modalContent}>
           {villageData && (
             <>
@@ -2506,6 +2509,7 @@ const Baramati = () => {
         </View>
       </Modal>
     </View>
+    </ScrollView>
   );
 };
 
@@ -2516,6 +2520,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalScrollViewContent: {
+    flexGrow: 1,
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10,

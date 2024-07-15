@@ -97,6 +97,7 @@ const KaryakartaForm = () => {
           ]}
           onPress={(selectedId) => handleRadioButtonChange("nationality", selectedId)}
           selectedId={formData.nationality}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -114,6 +115,7 @@ const KaryakartaForm = () => {
           ]}
           onPress={(selectedId) => handleRadioButtonChange("religion", selectedId)}
           selectedId={formData.religion}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -182,6 +184,7 @@ const KaryakartaForm = () => {
           ]}
           onPress={(selectedId) => handleRadioButtonChange("bloodGroup", selectedId)}
           selectedId={formData.bloodGroup}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -203,6 +206,7 @@ const KaryakartaForm = () => {
           ]}
           onPress={(selectedId) => handleRadioButtonChange("type", selectedId)}
           selectedId={formData.type}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -267,6 +271,7 @@ const KaryakartaForm = () => {
           ]}
           onPress={(selectedId) => handleRadioButtonChange("designation", selectedId)}
           selectedId={formData.designation}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -303,6 +308,7 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 18,
     marginVertical: 10,
+    color: "#000", // Text color set to black
   },
   radioContainer: {
     marginBottom: 10,
@@ -312,11 +318,15 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "flex-start",
   },
+  radioLabel: {
+    color: "#000", // Text color set to black for radio button labels
+  },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 10,
     marginVertical: 10,
+    color: "#000", // Text color set to black for input fields
   },
   button: {
     backgroundColor: "#007bff",
@@ -324,6 +334,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     marginVertical: 20,
+    marginBottom : 50,
   },
   buttonText: {
     color: "#fff",

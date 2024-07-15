@@ -21,6 +21,8 @@ export type RootStackParamList = {
   Bhordetails: undefined;
   Surveyformdetails: undefined;
   Karyakartadetails: undefined;
+  BaramatiVillageInformation: { villageId: number };
+  VillageDetails: { id: number };
 };
 
 type ParamListBase = RootStackParamList;

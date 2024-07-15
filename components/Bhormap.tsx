@@ -153,6 +153,14 @@ const Bhormap = () => {
       console.error('Village data is null');
     }
   };
+  const reloadSvgInfo = async () => {
+    try {
+      await AsyncStorage.removeItem('svgInfo');
+      fetchSvgInfo();
+    } catch (error) {
+      console.error('Error clearing and reloading AsyncStorage:', error);
+    }
+  };
 
   const svgText = `
     <svg height="1946" width="2347">
@@ -1507,7 +1515,7 @@ const Bhormap = () => {
           width="1544" height="1452"
           preserveAspectRatio="xMidYMid meet"
           transform="matrix(0.24 0 0 0.24 1.68 0)"
-        />
+          />
       </Svg>
 
     
@@ -4174,6 +4182,8 @@ const Bhormap = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
   },
   modalContent: {
     backgroundColor: 'white',

@@ -84,6 +84,7 @@ const SurveyForm: React.FC = () => {
         ]}
         onPress={(value) => handleInputChange('votingArea', value)}
         selectedId={formData.votingArea}
+        labelStyle={styles.radioLabel}
       />
 
       {/* Question 2 */}
@@ -98,6 +99,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('executiveNumber', value)}
           selectedId={formData.executiveNumber}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -150,6 +152,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('division', value)}
           selectedId={formData.division}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -167,6 +170,7 @@ const SurveyForm: React.FC = () => {
           )}
           onPress={(value) => handleInputChange('ageGroup', value)}
           selectedId={formData.ageGroup}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -182,6 +186,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('gender', value)}
           selectedId={formData.gender}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -204,6 +209,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('religion', value)}
           selectedId={formData.religion}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -219,6 +225,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('caste', value)}
           selectedId={formData.caste}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -302,6 +309,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('mpSatisfaction', value)}
           selectedId={formData.mpSatisfaction}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -324,6 +332,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('pmOpinion', value)}
           selectedId={formData.pmOpinion}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -346,6 +355,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('deputyCmOpinion', value)}
           selectedId={formData.deputyCmOpinion}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -369,6 +379,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('localLeader', value)}
           selectedId={formData.localLeader}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -393,6 +404,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('votingParty', value)}
           selectedId={formData.votingParty}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -417,6 +429,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('winningParty', value)}
           selectedId={formData.winningParty}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -439,6 +452,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('developmentImpact', value)}
           selectedId={formData.developmentImpact}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -461,6 +475,7 @@ const SurveyForm: React.FC = () => {
           }))}
           onPress={(value) => handleInputChange('schemeBenefit', value)}
           selectedId={formData.schemeBenefit}
+          labelStyle={styles.radioLabel}
         />
       </View>
 
@@ -553,16 +568,26 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color : '#000',
   },
   question: {
     fontSize: 18,
     marginBottom: 10,
+    color : '#000',
+  },
+  radioLabel: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: 'black', // Text color set to black
   },
   radioGroup: {
     marginBottom: 20,
+    alignItems: 'flex-start',
+    color : '#000',
   },
   radioContainer: {
     marginBottom: 20,
+    color : '#000',
   },
   input: {
     borderWidth: 1,
@@ -570,21 +595,25 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
+    color : '#000',
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    color : '#000',
   },
   checkboxLabel: {
     marginLeft: 10,
     fontSize: 16,
+    color : '#000',
   },
   submitButton: {
     backgroundColor: '#007bff',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
+    marginBottom: 50,
   },
   submitButtonText: {
     color: '#fff',
