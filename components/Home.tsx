@@ -59,12 +59,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
+    color : '#000'
   },
   paragraph: {
     fontSize: 16,
     textAlign: 'justify',
     lineHeight: 24,
     padding : 7,
+    color : '#000'
   },
   imageContainer: {
     width: '100%',

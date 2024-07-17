@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginBottom: 20,
+    color : '#000'
   },
   pickerContainer: {
     borderWidth: 1,
@@ -78,31 +79,37 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: 20,
     width: '100%',
+    color : '#000',
     marginTop : 20,
   },
   picker: {
     height: 50,
     width: '100%',
+    color : '#000'
   },
   infoContainer: {
     width: '100%',
     alignItems: 'center',
+    color : '#000'
   },
   image: {
     width: '100%',
     height: 200,
     marginBottom: 20,
+    color : '#000'
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
+    color : '#000'
   },
   description: {
     fontSize: 16,
     textAlign: 'justify',
     paddingHorizontal: 10,
+    color : '#000'
   },
 });
 
